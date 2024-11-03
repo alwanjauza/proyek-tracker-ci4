@@ -83,6 +83,11 @@
                                 </tbody>
 
                             </table>
+                            <div class="mt-4">
+                                <button type="button" class="btn btn-success btn-fw d-flex align-items-center" onclick="window.location.href='<?= base_url('project/pengembangan/export-pdf'); ?>'">
+                                    <i class="mdi mdi-file mr-2"></i> Export PDF
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

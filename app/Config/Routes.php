@@ -17,6 +17,7 @@ $routes->get('/project/edit/(:num)', 'Ajuan::editAjuan/$1');
 $routes->post('/project/update/(:num)', 'Ajuan::updateAjuan/$1');
 $routes->get('/project/view/(:num)', 'Ajuan::viewAjuan/$1');
 $routes->get('/project/delete/(:num)', 'Ajuan::deleteAjuan/$1', ['filter' => 'role:admin']);
+$routes->get('/project/pengembangan/export-pdf', 'Ajuan::exportPDF', ['filter' => 'role:admin']);
 
 // PEMBUATAN ROUTES
 $routes->get('/project/list-pembuatan', 'PembuatanAplikasi::ajuan');
@@ -28,6 +29,7 @@ $routes->get('/project/edit-pembuatan/(:num)', 'PembuatanAplikasi::editAjuan/$1'
 $routes->post('/project/update-pembuatan/(:num)', 'PembuatanAplikasi::updateAjuan/$1');
 $routes->get('/project/view-pembuatan/(:num)', 'PembuatanAplikasi::viewAjuan/$1');
 $routes->get('/project/delete-pembuatan/(:num)', 'PembuatanAplikasi::deleteAjuan/$1', ['filter' => 'role:admin']);
+$routes->get('/project/pembuatan/export-pdf', 'PembuatanAplikasi::exportPDF', ['filter' => 'role:admin']);
 
 // USER ROUTES
 $routes->add('/admin/user/list', 'User::list', ['filter' => 'role:admin']);

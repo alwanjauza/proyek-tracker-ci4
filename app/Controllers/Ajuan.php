@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 class Ajuan extends BaseController
 {
     protected $db;
@@ -19,6 +22,30 @@ class Ajuan extends BaseController
         $this->bagianModel = new \App\Models\BagianModel();
         $this->timItModel = new \App\Models\TimItModel();
         $this->progresModel = new \App\Models\ProgresModel();
+    }
+
+    public function exportPDF()
+    {
+        $options = new Options();
+        $options->set('defaultFont', 'Times-Roman');
+
+        $dompdf = new Dompdf($options);
+        $html = view('user/ajuan/export_pdf', [
+            'project' => $this->ajuanModel
+                ->select('tabel_ajuan.*, users.fullname, master_jenis_app.nama as jenis_app_name, tim_it.nama_tim')
+                ->join('users', 'users.id = tabel_ajuan.id_user', 'left')
+                ->join('master_jenis_app', 'master_jenis_app.id_jenis_app = tabel_ajuan.id_jenis_app', 'left')
+                ->join('tim_it', 'tim_it.id_tim = tabel_ajuan.id_tim', 'left')
+                ->where('tabel_ajuan.jenis_ajuan', 'Pengembangan Aplikasi')
+                ->where('YEAR(tabel_ajuan.created_at)', date('Y'))
+                ->asObject()
+                ->findAll()
+        ]);
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+        $dompdf->stream('laporan-pengembangan-aplikasi.pdf', ['Attachment' => 0]);
     }
 
     public function ajuan()
