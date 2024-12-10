@@ -44,7 +44,22 @@
                                             <?php else : ?>
                                                 <td><a href="<?= base_url($p->file_path); ?>" target="_blank">Lihat Dokumen</a></td>
                                             <?php endif; ?>
-                                            <td><?= $p->percentage; ?> %</td>
+                                            <td>
+                                                <div class="progress">
+                                                    <?php
+                                                    $percentage = $p->percentage;
+                                                    $progressBarClass = 'bg-danger';
+                                                    if ($percentage > 80) {
+                                                        $progressBarClass = 'bg-success';
+                                                    } elseif ($percentage > 20) {
+                                                        $progressBarClass = 'bg-warning';
+                                                    }
+                                                    ?>
+                                                    <div class="progress-bar <?= $progressBarClass; ?>" role="progressbar" style="width: <?= $percentage; ?>%; text-align: center;" aria-valuenow="<?= $percentage; ?>" aria-valuemin="0" aria-valuemax="100">
+                                                        <?= $percentage; ?>%
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <?php if ($p->status == 'on_review') : ?>
                                                     <span class="badge badge-warning">On Review</span>

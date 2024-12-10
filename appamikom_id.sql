@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 16, 2024 at 11:37 PM
+-- Generation Time: Dec 10, 2024 at 02:57 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `appamikom`
+-- Database: `appamikom_test`
 --
 
 -- --------------------------------------------------------
@@ -114,7 +114,8 @@ INSERT INTO `auth_groups_users` (`group_id`, `user_id`) VALUES
 (2, 73),
 (2, 74),
 (2, 75),
-(2, 76);
+(2, 76),
+(2, 77);
 
 -- --------------------------------------------------------
 
@@ -246,7 +247,39 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (108, '::1', 'Pia', 39, '2024-10-16 23:16:39', 0),
 (109, '::1', 'tmulyani@yahoo.com', 58, '2024-10-16 23:18:01', 1),
 (110, '::1', 'sifezecufa@mailinator.com', 26, '2024-10-16 23:18:13', 1),
-(111, '::1', 'sifezecufa@mailinator.com', 26, '2024-10-16 23:33:11', 1);
+(111, '::1', 'sifezecufa@mailinator.com', 26, '2024-10-16 23:33:11', 1),
+(112, '::1', 'alwan jauza', NULL, '2024-11-04 03:54:10', 0),
+(113, '::1', 'sifezecufa@mailinator.com', 26, '2024-11-04 03:55:08', 1),
+(114, '::1', 'azismustache', NULL, '2024-11-05 17:27:22', 0),
+(115, '::1', 'azisfajar', NULL, '2024-11-05 17:27:56', 0),
+(116, '::1', 'azis fajar', NULL, '2024-11-05 17:28:10', 0),
+(117, '::1', 'alwanjauza', NULL, '2024-11-05 17:28:36', 0),
+(118, '::1', 'azismustache@gmail.com', 26, '2024-11-05 17:28:51', 1),
+(119, '::1', 'azismustache@gmail.com', 26, '2024-11-05 17:30:42', 1),
+(120, '::1', 'azismustache@gmail.com', 26, '2024-11-08 10:23:07', 1),
+(121, '::1', 'azis', NULL, '2024-11-29 04:18:27', 0),
+(122, '::1', 'azismustache', NULL, '2024-11-29 04:18:33', 0),
+(123, '::1', 'azismustache@gmail.com', 26, '2024-11-29 04:18:43', 1),
+(124, '::1', 'fajarazis@gmail.com', 77, '2024-11-29 04:19:53', 1),
+(125, '::1', 'azismustache@gmail.com', 26, '2024-11-29 04:24:46', 1),
+(126, '::1', 'fajarazis@gmail.com', 77, '2024-11-29 04:26:55', 1),
+(127, '::1', 'azismustache@gmail.com', 26, '2024-11-29 04:29:56', 1),
+(128, '::1', 'azismustache@gmail.com', 26, '2024-11-29 07:04:26', 1),
+(129, '::1', 'fajarazis@gmail.com', 77, '2024-11-29 07:33:17', 1),
+(130, '::1', 'azismustache@gmail.com', 26, '2024-11-29 07:46:36', 1),
+(131, '::1', 'fajarazis@gmail.com', 77, '2024-11-29 07:57:52', 1),
+(132, '::1', 'azismustache@gmail.com', 26, '2024-11-29 08:02:05', 1),
+(133, '::1', 'azismustache@gmail.com', 26, '2024-12-04 03:03:21', 1),
+(134, '::1', 'fajarazis@gmail.com', 77, '2024-12-04 03:05:49', 1),
+(135, '::1', 'azismustache@gmail.com', 26, '2024-12-07 02:30:56', 1),
+(136, '::1', 'azismustache@gmail.com', 26, '2024-12-09 01:19:45', 1),
+(137, '::1', 'byoncombat@gmail.com', NULL, '2024-12-09 01:20:16', 0),
+(138, '::1', 'azismustache@gmail.com', 26, '2024-12-09 01:20:25', 1),
+(139, '::1', 'cahyadi.yuliarti@gmail.com', 57, '2024-12-09 01:20:42', 1),
+(140, '::1', 'azismustache@gmail.com', NULL, '2024-12-09 05:55:51', 0),
+(141, '::1', 'azismustache@gmail.com', 26, '2024-12-09 05:55:59', 1),
+(142, '::1', 'azismustache@gmail.com', 26, '2024-12-10 02:07:48', 1),
+(143, '::1', 'azismustache@gmail.com', 26, '2024-12-10 02:56:29', 1);
 
 -- --------------------------------------------------------
 
@@ -358,11 +391,17 @@ CREATE TABLE `master_bagian` (
 --
 
 INSERT INTO `master_bagian` (`id_bagian`, `nama_bagian`, `created_at`, `updated_at`) VALUES
-(1, 'Rektor', '2024-10-16 05:26:29', '2024-10-16 05:26:29'),
 (2, 'Dekan', '2024-10-16 05:26:36', '2024-10-16 05:26:36'),
-(3, 'Ketua Jurusan', '2024-10-16 05:26:44', '2024-10-16 05:26:44'),
-(4, 'Ketua Program Studi', '2024-10-16 05:26:53', '2024-10-16 05:26:53'),
-(5, 'Dosen Pembimbing Akademik', '2024-10-16 05:27:04', '2024-10-16 05:27:04');
+(6, 'Prodi Informatika', '2024-11-04 03:57:35', '2024-11-04 03:57:35'),
+(7, 'Prodi Sistem Informasi', '2024-11-04 03:59:10', '2024-11-04 03:59:10'),
+(8, 'Prodi Teknologi Informasi', '2024-11-04 03:59:30', '2024-11-04 03:59:30'),
+(9, 'Humas dan Kerja Sama', '2024-11-04 03:59:56', '2024-11-04 03:59:56'),
+(10, 'Kemahasiswaan', '2024-11-04 04:00:09', '2024-11-04 04:00:09'),
+(11, 'LP2M', '2024-11-04 04:00:20', '2024-11-04 04:00:20'),
+(12, 'LP3M', '2024-11-04 04:00:30', '2024-11-04 04:00:30'),
+(13, 'Magister Ilmu Komputer', '2024-11-04 04:00:43', '2024-11-04 04:00:43'),
+(14, 'Perpustakaan', '2024-11-04 04:00:58', '2024-11-04 04:00:58'),
+(15, 'BAA', '2024-11-04 04:01:51', '2024-11-04 04:01:51');
 
 -- --------------------------------------------------------
 
@@ -476,6 +515,7 @@ CREATE TABLE `tabel_ajuan` (
   `waktu_kerja` int DEFAULT NULL,
   `fungsi` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `nama_aplikasi` varchar(100) NOT NULL,
+  `file_path` varchar(255) NOT NULL,
   `deskripsi` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `tahap_saat_ini` enum('Pengajuan','Validasi Tim IT','Perencanaan','Analisa','Pembuatan','Review Implementasi','Done') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Pengajuan',
   `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'on_review',
@@ -489,10 +529,13 @@ CREATE TABLE `tabel_ajuan` (
 -- Dumping data for table `tabel_ajuan`
 --
 
-INSERT INTO `tabel_ajuan` (`id_ajuan`, `id_user`, `id_bagian`, `id_jenis_app`, `jenis_ajuan`, `waktu_kerja`, `fungsi`, `nama_aplikasi`, `deskripsi`, `tahap_saat_ini`, `status`, `percentage`, `id_tim`, `created_at`, `updated_at`) VALUES
-(18, 26, 2, 2, 'Pengembangan Aplikasi', 10, 'Esse nihil aliquip ', 'Omnis consequat MinA', 'Voluptates autem cum', 'Validasi Tim IT', 'on_review', 10, 1, '2024-10-16 15:44:40', '2024-10-16 22:31:11'),
-(19, 26, 5, 1, 'Pembuatan Aplikasi', 15, 'Untuk monitoring progress pembelajaran', '', 'Saepe est quibusdam', 'Perencanaan', 'rejected', 20, 1, '2024-10-16 21:52:59', '2024-10-16 22:35:20'),
-(20, 36, 5, 3, 'Pembuatan Aplikasi', 30, 'Berfungsi dengan baik dan benar sih', '', 'Buat baru', 'Perencanaan', 'on_review', 20, 2, '2024-10-16 22:35:50', '2024-10-16 22:37:04');
+INSERT INTO `tabel_ajuan` (`id_ajuan`, `id_user`, `id_bagian`, `id_jenis_app`, `jenis_ajuan`, `waktu_kerja`, `fungsi`, `nama_aplikasi`, `file_path`, `deskripsi`, `tahap_saat_ini`, `status`, `percentage`, `id_tim`, `created_at`, `updated_at`) VALUES
+(18, 26, 2, 2, 'Pengembangan Aplikasi', 10, 'Esse nihil aliquip ', 'Omnis consequat MinA', '', 'Voluptates autem cum', 'Analisa', 'on_review', 40, 1, '2024-10-16 15:44:40', '2024-11-05 17:29:33'),
+(19, 26, 5, 1, 'Pembuatan Aplikasi', 15, 'Untuk monitoring progress pembelajaran', '', '', 'Saepe est quibusdam', 'Perencanaan', 'rejected', 20, 1, '2024-10-16 21:52:59', '2024-10-16 22:35:20'),
+(20, 36, 5, 3, 'Pembuatan Aplikasi', 30, 'Berfungsi dengan baik dan benar sih', '', '', 'Buat baru', 'Perencanaan', 'on_review', 20, 2, '2024-10-16 22:35:50', '2024-10-16 22:37:04'),
+(21, 77, 11, 1, 'Pengembangan Aplikasi', NULL, 'Untuk memonitoring kegiatan kampus Universitas Amikom Purwokerto', 'Aplikasi Monitoring', '', 'Untuk memonitoring kegiatan kampus Universitas Amikom Purwokerto agar lebih efisien', 'Done', 'Done', 100, 1, '2024-11-29 04:23:22', '2024-11-29 04:31:16'),
+(22, 77, 7, 1, 'Pengembangan Aplikasi', NULL, 'Untuk memonitoring kegiatan Pasca Sarjana Universitas Amikom Purwokerto', 'Aplikasi Pasca Sarjana', '', 'Untuk memonitoring kegiatan Pasca Sarjana Universitas Amikom Purwokerto', 'Perencanaan', 'on_review', 20, 2, '2024-11-29 04:24:35', '2024-11-29 07:47:21'),
+(23, 77, 12, 1, 'Pengembangan Aplikasi', NULL, 'Untuk mrmbuat website komunitas mahasiswa', 'Aplikasi IT', '', 'Untuk mrmbuat website komunitas mahasiswa 2', 'Validasi Tim IT', 'on_review', 10, 1, '2024-11-29 07:58:46', '2024-11-29 08:05:37');
 
 -- --------------------------------------------------------
 
@@ -516,13 +559,24 @@ CREATE TABLE `tabel_log_progress` (
 --
 
 INSERT INTO `tabel_log_progress` (`id_log`, `id_ajuan`, `tahap`, `tanggal_mulai`, `tanggal_selesai`, `keterangan`, `created_at`, `updated_at`) VALUES
-(27, 18, 'Validasi Tim IT', '2024-10-16 22:31:11', NULL, 'Tahap Validasi Tim IT dimulai', '2024-10-16 22:31:11', '2024-10-16 22:31:11'),
+(27, 18, 'Validasi Tim IT', '2024-10-16 22:31:11', '2024-11-05 17:29:26', 'Tahap Validasi Tim IT dimulai', '2024-10-16 22:31:11', '2024-11-05 17:29:26'),
 (28, 19, 'Validasi Tim IT', '2024-10-16 22:31:17', '2024-10-16 22:32:46', 'Tahap Validasi Tim IT dimulai', '2024-10-16 22:31:17', '2024-10-16 22:32:46'),
 (29, 19, 'Perencanaan', '2024-10-16 22:32:46', NULL, 'Tahap Perencanaan dimulai', '2024-10-16 22:32:46', '2024-10-16 22:32:46'),
 (30, 19, 'Perencanaan', '2024-10-16 22:35:20', NULL, 'Pengajuan ditolak pada tahap Perencanaan', '2024-10-16 22:35:20', '2024-10-16 22:35:20'),
 (31, 20, 'Validasi Tim IT', '2024-10-16 22:36:31', '2024-10-16 22:37:04', 'Tahap Validasi Tim IT dimulai', '2024-10-16 22:36:31', '2024-10-16 22:37:04'),
 (32, 20, 'Validasi Tim IT', '2024-10-16 22:36:42', '2024-10-16 22:37:04', 'Pengajuan ditolak pada tahap Validasi Tim IT', '2024-10-16 22:36:42', '2024-10-16 22:37:04'),
-(33, 20, 'Perencanaan', '2024-10-16 22:37:04', NULL, 'Tahap Perencanaan dimulai', '2024-10-16 22:37:04', '2024-10-16 22:37:04');
+(33, 20, 'Perencanaan', '2024-10-16 22:37:04', NULL, 'Tahap Perencanaan dimulai', '2024-10-16 22:37:04', '2024-10-16 22:37:04'),
+(34, 18, 'Perencanaan', '2024-11-05 17:29:26', '2024-11-05 17:29:33', 'Tahap Perencanaan dimulai', '2024-11-05 17:29:26', '2024-11-05 17:29:33'),
+(35, 18, 'Analisa', '2024-11-05 17:29:33', NULL, 'Tahap Analisa dimulai', '2024-11-05 17:29:33', '2024-11-05 17:29:33'),
+(36, 21, 'Validasi Tim IT', '2024-11-29 04:24:57', '2024-11-29 04:25:07', 'Tahap Validasi Tim IT dimulai', '2024-11-29 04:24:57', '2024-11-29 04:25:07'),
+(37, 21, 'Perencanaan', '2024-11-29 04:25:07', '2024-11-29 04:25:14', 'Tahap Perencanaan dimulai', '2024-11-29 04:25:07', '2024-11-29 04:25:14'),
+(38, 21, 'Analisa', '2024-11-29 04:25:14', '2024-11-29 04:25:21', 'Tahap Analisa dimulai', '2024-11-29 04:25:14', '2024-11-29 04:25:21'),
+(39, 21, 'Pembuatan', '2024-11-29 04:25:21', '2024-11-29 04:25:28', 'Tahap Pembuatan dimulai', '2024-11-29 04:25:21', '2024-11-29 04:25:28'),
+(40, 21, 'Review Implementasi', '2024-11-29 04:25:28', '2024-11-29 04:25:35', 'Tahap Review Implementasi dimulai', '2024-11-29 04:25:28', '2024-11-29 04:25:35'),
+(41, 21, 'Done', '2024-11-29 04:25:35', NULL, 'Tahap Done dimulai', '2024-11-29 04:25:35', '2024-11-29 04:25:35'),
+(42, 22, 'Validasi Tim IT', '2024-11-29 07:04:53', '2024-11-29 07:47:21', 'Tahap Validasi Tim IT dimulai', '2024-11-29 07:04:53', '2024-11-29 07:47:21'),
+(43, 22, 'Perencanaan', '2024-11-29 07:47:21', NULL, 'Tahap Perencanaan dimulai', '2024-11-29 07:47:21', '2024-11-29 07:47:21'),
+(44, 23, 'Validasi Tim IT', '2024-11-29 08:05:37', NULL, 'Tahap Validasi Tim IT dimulai', '2024-11-29 08:05:37', '2024-11-29 08:05:37');
 
 -- --------------------------------------------------------
 
@@ -579,7 +633,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `no_identitas`, `fullname`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`, `id_fakultas`, `id_prodi`) VALUES
-(26, 'sifezecufa@mailinator.com', 'alwanjauza', '4002489531998521', 'Julie Sweeney', '$2y$10$aXDdkaJiiSx6tpN1BEkgfu4A0pTi54J83l0nIej3qmv91JplTx0BK', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-14 23:11:37', '2024-10-16 21:28:32', NULL, 8, 6),
+(26, 'azismustache@gmail.com', 'azisfajar', '4002489531998521', 'Azis Fajar Maulana', '$2y$10$aXDdkaJiiSx6tpN1BEkgfu4A0pTi54J83l0nIej3qmv91JplTx0BK', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-14 23:11:37', '2024-10-16 21:28:32', NULL, 8, 6),
 (34, 'ryxodabyv1@mailinator.com', 'kubazacog', NULL, 'Colleen Ware', '$2y$10$ZpfXUPDZ0K9X/ja1hizs0.DvjvwTTuSbccL3mXs84bLsTG7U/Pghe', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-14 23:59:36', '2024-10-15 00:29:11', NULL, NULL, NULL),
 (35, 'hali@mailinator.com', 'navakuha', '3321116502910000', 'Hamilton Mccall', '$2y$10$GgEk3qoQGVdumJHlpWfmReHBKAKvPBHbOU.vNluE7/E0McCBm1AhO', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-16 05:04:30', '2024-10-16 05:07:37', NULL, 8, 6),
 (36, 'byoncombat@mail.com', 'byoncat', '3522055431889087', 'Sumanto', '$2y$10$fXAd.c4IxNw6Qui6Pwu.K.JDLCPqSCwk58ajiRK1WjemFgF4VX67u', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-16 05:59:34', '2024-10-16 06:13:32', NULL, 8, 6),
@@ -602,7 +656,8 @@ INSERT INTO `users` (`id`, `email`, `username`, `no_identitas`, `fullname`, `pas
 (73, 'andriani.zahra@gmail.com', 'Paris', NULL, NULL, '$2y$10$xyQyOlTGkJZ1eMSNj4n2V.tvdFHzjfOTJH7pCxCuiuEB2H4GL1vJe', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '1980-11-07 22:58:00', '2023-05-04 23:54:02', NULL, NULL, NULL),
 (74, 'irma19@yahoo.com', 'Ira', NULL, NULL, '$2y$10$dPYOx2E3vSjTox0LJAMxYu.zjCuFuDwc51KC6fx658hg.c.lhVdLC', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2005-08-19 08:37:20', '2017-05-08 08:59:33', NULL, NULL, NULL),
 (75, 'hhalimah@gmail.co.id', 'Darijan', NULL, NULL, '$2y$10$EUjpaR2IUlJa6xP/V2VqAutMIlI.BbtJOLYmZwBkvI6VVN5/dXDl6', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '1995-09-20 11:08:50', '1974-08-04 00:10:03', NULL, NULL, NULL),
-(76, 'kusmawati.raihan@mahendra.biz.id', 'Heryanto', NULL, NULL, '$2y$10$COI3hZd5h.LSwtDngxUJeeD/Az6sEt9DOmd48k6s6wekdoz.ZOrBy', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '1998-07-01 08:18:52', '1978-07-06 09:42:21', NULL, NULL, NULL);
+(76, 'kusmawati.raihan@mahendra.biz.id', 'Heryanto', NULL, NULL, '$2y$10$COI3hZd5h.LSwtDngxUJeeD/Az6sEt9DOmd48k6s6wekdoz.ZOrBy', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '1998-07-01 08:18:52', '1978-07-06 09:42:21', NULL, NULL, NULL),
+(77, 'fajarazis@gmail.com', 'fajar azis', '1234567890', 'Fajar Azis Maulana', '$2y$10$nK.NWqOmyP1h6pfHkxf9QeXdHm0sDKjjeSXQ6bmqknNOHQXhAIWM.', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-11-29 04:19:44', '2024-11-29 04:22:55', NULL, 8, 6);
 
 --
 -- Indexes for dumped tables
@@ -767,7 +822,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -797,7 +852,7 @@ ALTER TABLE `fakultas`
 -- AUTO_INCREMENT for table `master_bagian`
 --
 ALTER TABLE `master_bagian`
-  MODIFY `id_bagian` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_bagian` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `master_jenis_app`
@@ -833,13 +888,13 @@ ALTER TABLE `psdm_karyawan`
 -- AUTO_INCREMENT for table `tabel_ajuan`
 --
 ALTER TABLE `tabel_ajuan`
-  MODIFY `id_ajuan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_ajuan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `tabel_log_progress`
 --
 ALTER TABLE `tabel_log_progress`
-  MODIFY `id_log` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_log` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `tim_it`
@@ -851,7 +906,7 @@ ALTER TABLE `tim_it`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- Constraints for dumped tables
