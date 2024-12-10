@@ -20,6 +20,7 @@ class AjuanModel extends Model
         'waktu_kerja',
         'fungsi',
         'nama_aplikasi',
+        'file_path',
         'deskripsi',
         'percentage',
         'tahap_saat_ini',

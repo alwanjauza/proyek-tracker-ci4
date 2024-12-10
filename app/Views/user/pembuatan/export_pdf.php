@@ -26,7 +26,15 @@
 </head>
 
 <body>
-    <h1>Laporan Pembuatan Aplikasi Tahun <?= date("Y") ?></h1>
+    <?php
+    $currentMonth = date('n');
+    if ($currentMonth <= 6) {
+        $periode = 'Januari - Juni ' . date('Y');
+    } else {
+        $periode = 'Juli - Desember ' . date('Y');
+    }
+    ?>
+    <h1>Laporan Pembuatan Aplikasi Periode <?= $periode ?></h1>
     <table>
         <thead>
             <tr>

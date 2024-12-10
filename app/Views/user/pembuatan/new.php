@@ -16,7 +16,7 @@
                                 <p class="mb-0"><?= session()->getFlashdata('error') ?></p>
                             </blockquote>
                         <?php endif; ?>
-                        <form class="forms-sample" action="/project/create-pembuatan" method="post">
+                        <form class="forms-sample" action="/project/create-pembuatan" method="post" enctype="multipart/form-data">
                             <?= csrf_field(); ?>
                             <div class="form-group">
                                 <label for="id_bagian">Bagian</label>
@@ -60,6 +60,16 @@
                                             <?= session()->getFlashdata('errors')['waktu_kerja'] ?>
                                         </div>
                                     <?php endif; ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="file-upload">File Upload</label>
+                                <input type="file" name="file" id="file-upload" class="file-upload-default">
+                                <div class="input-group col-xs-12">
+                                    <input type="text" class="form-control file-upload-info" disabled placeholder="Upload File">
+                                    <span class="input-group-append">
+                                        <button class="file-upload-browse btn btn-primary" type="button">Browse</button>
+                                    </span>
                                 </div>
                             </div>
                             <div class="form-group">

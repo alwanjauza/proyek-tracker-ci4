@@ -22,6 +22,7 @@
                                         <th>Jenis</th>
                                         <th>Nama Tim</th>
                                         <th>Waktu Kerja</th>
+                                        <th>Dokumen</th>
                                         <th>Persentase</th>
                                         <th>Status</th>
                                         <?php if (in_groups('admin') || in_groups('user')) : ?>
@@ -38,23 +39,12 @@
                                             <td><?= $p->jenis_app_name; ?></td>
                                             <td><?= $p->nama_tim; ?></td>
                                             <td><?= $p->waktu_kerja; ?> Hari</td>
-                                            <td>
-                                                <?php
-                                                $progress = $p->percentage;
-                                                $progressClass = '';
-
-                                                if ($progress < 30) {
-                                                    $progressClass = 'bg-danger';
-                                                } elseif ($progress < 70) {
-                                                    $progressClass = 'bg-warning';
-                                                } else {
-                                                    $progressClass = 'bg-success';
-                                                }
-                                                ?>
-                                                <div class="progress">
-                                                    <div class="progress-bar <?= $progressClass ?>" role="progressbar" style="width: <?= $progress ?>%" aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </td>
+                                            <?php if ($p->file_path == null) : ?>
+                                                <td>Belum ada dokumen</td>
+                                            <?php else : ?>
+                                                <td><a href="<?= base_url($p->file_path); ?>" target="_blank">Lihat Dokumen</a></td>
+                                            <?php endif; ?>
+                                            <td><?= $p->percentage; ?> %</td>
                                             <td>
                                                 <?php if ($p->status == 'on_review') : ?>
                                                     <span class="badge badge-warning">On Review</span>
@@ -82,11 +72,13 @@
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
-                            <div class="mt-4">
-                                <button type="button" class="btn btn-success btn-fw d-flex align-items-center" onclick="window.location.href='<?= base_url('project/pembuatan/export-pdf'); ?>'">
-                                    <i class="mdi mdi-file mr-2"></i> Export PDF
-                                </button>
-                            </div>
+                            <?php if (in_groups('admin')) : ?>
+                                <div class="mt-4">
+                                    <button type="button" class="btn btn-success btn-fw d-flex align-items-center" onclick="window.location.href='<?= base_url('project/pembuatan/export-pdf'); ?>'">
+                                        <i class="mdi mdi-file mr-2"></i> Export PDF
+                                    </button>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

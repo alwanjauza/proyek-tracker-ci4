@@ -30,14 +30,28 @@ class Ajuan extends BaseController
         $options->set('defaultFont', 'Times-Roman');
 
         $dompdf = new Dompdf($options);
-        $html = view('user/ajuan/export_pdf', [
+
+        $currentMonth = date('n');
+
+        if ($currentMonth <= 6) {
+            $startDate = date('Y') . '-01-01';
+            $endDate = date('Y') . '-06-30';
+            $periode = 'jan-jun';
+        } else {
+            $startDate = date('Y') . '-07-01';
+            $endDate = date('Y') . '-12-31';
+            $periode = 'jul-des';
+        }
+
+        $html = view('user/pembuatan/export_pdf', [
             'project' => $this->ajuanModel
                 ->select('tabel_ajuan.*, users.fullname, master_jenis_app.nama as jenis_app_name, tim_it.nama_tim')
                 ->join('users', 'users.id = tabel_ajuan.id_user', 'left')
                 ->join('master_jenis_app', 'master_jenis_app.id_jenis_app = tabel_ajuan.id_jenis_app', 'left')
                 ->join('tim_it', 'tim_it.id_tim = tabel_ajuan.id_tim', 'left')
                 ->where('tabel_ajuan.jenis_ajuan', 'Pengembangan Aplikasi')
-                ->where('YEAR(tabel_ajuan.created_at)', date('Y'))
+                ->where('tabel_ajuan.created_at >=', $startDate)
+                ->where('tabel_ajuan.created_at <=', $endDate)
                 ->asObject()
                 ->findAll()
         ]);
@@ -45,7 +59,9 @@ class Ajuan extends BaseController
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
-        $dompdf->stream('laporan-pengembangan-aplikasi.pdf', ['Attachment' => 0]);
+
+        $filename = 'laporan-pengembangan-aplikasi-' . $periode . '.pdf';
+        $dompdf->stream($filename, ['Attachment' => 0]);
     }
 
     public function ajuan()
@@ -98,12 +114,33 @@ class Ajuan extends BaseController
                     'required' => 'Bagian harus dipilih',
                 ]
             ],
+            'file' => [
+                'rules' => 'uploaded[file]',
+                'errors' => [
+                    'uploaded' => 'File harus diunggah.',
+                ],
+            ],
         ])) {
             return redirect()->to('/project/new-project')->withInput()->with('errors', $this->validator->getErrors());
         }
 
         if (!user()->fullname || !user()->no_identitas || !user()->id_fakultas || !user()->id_prodi) {
             return redirect()->to('/project/new-project')->with('error', 'Lengkapi profil terlebih dahulu!');
+        }
+
+        $file = $this->request->getFile('file');
+        $filePath = null;
+
+        if ($file->isValid() && !$file->hasMoved()) {
+            $userName = str_replace(' ', '_', strtolower(user()->fullname));
+            $date = date('d-m-Y');
+            $extension = $file->getClientExtension();
+
+            $fileName = "ajuan-{$userName}-{$date}.{$extension}";
+            $filePath = 'uploads/pengembangan_apps_files/' . $fileName;
+            $file->move('uploads/pengembangan_apps_files', $fileName);
+        } else {
+            return redirect()->to('/project/new-project')->with('error', 'File upload gagal!');
         }
 
         $this->ajuanModel->save([
@@ -117,11 +154,13 @@ class Ajuan extends BaseController
             'status' => 'on_review',
             'fungsi' => $this->request->getPost('fungsi'),
             'nama_aplikasi' => $this->request->getPost('nama_aplikasi'),
-            'deskripsi' => $this->request->getPost('deskripsi')
+            'deskripsi' => $this->request->getPost('deskripsi'),
+            'file_path' => $filePath,
         ]);
 
-        return redirect()->to('/project/data');
+        return redirect()->to('/project/data')->with('success', 'Ajuan berhasil dibuat.');
     }
+
 
     public function viewValidateAjuan($id)
     {
@@ -228,7 +267,8 @@ class Ajuan extends BaseController
             'ajuan' => $this->ajuanModel->asObject()->find($id),
             'bagian' => $this->bagianModel->findAll(),
             'jenisApp' => $this->jenisAppModel->findAll(),
-            'tim' => $this->timItModel->findAll()
+            'tim' => $this->timItModel->findAll(),
+            'file_path' => isset($ajuan['file_path']) ? $ajuan['file_path'] : ''
         ];
 
         return view('user/ajuan/edit', $data);
@@ -236,21 +276,50 @@ class Ajuan extends BaseController
 
     public function updateAjuan($id)
     {
-        $data = [
-            'id_bagian' => $this->request->getPost('id_bagian'),
-            'id_jenis_app' => $this->request->getPost('id_jenis_app'),
-            'fungsi' => $this->request->getPost('fungsi'),
-            'nama_aplikasi' => $this->request->getPost('nama_aplikasi'),
-            'deskripsi' => $this->request->getPost('deskripsi')
-        ];
+        $this->db->transBegin();
 
-        if (in_groups('admin')) {
-            $data['id_tim'] = $this->request->getPost('id_tim');
+        try {
+            $ajuan = $this->ajuanModel->find($id);
+
+            if (!$ajuan) {
+                return redirect()->to('/project/data')->with('error', 'Ajuan tidak ditemukan.');
+            }
+
+            if (in_groups('admin')) {
+                $data['id_tim'] = $this->request->getPost('id_tim');
+            }
+
+            $file = $this->request->getFile('file');
+            if ($file && $file->isValid() && !$file->hasMoved()) {
+                $namaFile = $file->getRandomName();
+                $file->move('uploads/pengembangan_apps_files', $namaFile);
+
+                if (!empty($ajuan['file_path']) && file_exists($ajuan['file_path'])) {
+                    unlink($ajuan['file_path']);
+                }
+            } else {
+                $namaFile = basename($ajuan['file_path']);
+            }
+
+            $data = [
+                'id_bagian' => $this->request->getPost('id_bagian'),
+                'id_jenis_app' => $this->request->getPost('id_jenis_app'),
+                'fungsi' => $this->request->getPost('fungsi'),
+                'nama_aplikasi' => $this->request->getPost('nama_aplikasi'),
+                'deskripsi' => $this->request->getPost('deskripsi'),
+                'file_path' => 'uploads/pengembangan_apps_files/' . $namaFile,
+            ];
+
+            $this->ajuanModel->update($id, $data);
+
+            $this->db->transCommit();
+
+            return redirect()->to('/project/data')->with('message', 'Ajuan berhasil diperbarui.');
+        } catch (\Exception $e) {
+            $this->db->transRollback();
+
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat memperbarui ajuan.');
         }
-
-        $this->ajuanModel->update($id, $data);
-
-        return redirect()->to('/project/data');
     }
 
     public function viewAjuan($id)
@@ -271,19 +340,30 @@ class Ajuan extends BaseController
         $this->db->transBegin();
 
         try {
+            $ajuan = $this->ajuanModel->find($id_ajuan);
+
+            if ($ajuan && !empty($ajuan['file_path'])) {
+                $file_path = WRITEPATH . '../public/' . $ajuan['file_path'];
+
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
+
             $this->progresModel->where('id_ajuan', $id_ajuan)->delete();
 
             $this->ajuanModel->delete($id_ajuan);
 
             $this->db->transCommit();
 
-            return redirect()->to('/project/data')->with('message', 'Pengajuan dan log berhasil dihapus.');
+            return redirect()->to('/project/data')->with('message', 'Pengajuan dan file berhasil dihapus.');
         } catch (\Exception $e) {
             $this->db->transRollback();
 
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus pengajuan.');
         }
     }
+
 
     public function formPengembanganAplikasi()
     {
