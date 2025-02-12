@@ -21,7 +21,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="<?=base_url()?>public/assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="<?=base_url()?>public/assets/images/favicon.png" />
+    <link rel="shortcut icon" href="<?=base_url()?>public/assets/images/amikom.png" />
   </head>
   <body>
   <?= $this->renderSection('content') ?>

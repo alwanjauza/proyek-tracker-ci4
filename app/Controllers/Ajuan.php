@@ -150,7 +150,7 @@ class Ajuan extends BaseController
             'id_tim' => $this->request->getPost('id_tim'),
             'jenis_ajuan' => 'Pengembangan Aplikasi',
             'percentage' => 0,
-            'tahap_saat_ini' => 'pengajuan',
+            'tahap_saat_ini' => 'Pengajuan',
             'status' => 'on_review',
             'fungsi' => $this->request->getPost('fungsi'),
             'nama_aplikasi' => $this->request->getPost('nama_aplikasi'),
@@ -201,6 +201,8 @@ class Ajuan extends BaseController
 
             return redirect()->back()->with('message', 'Pengajuan ditolak.');
         }
+        // Tambahkan di atas switch-case
+         
 
         switch ($ajuan['tahap_saat_ini']) {
             case 'Pengajuan':
@@ -216,14 +218,22 @@ class Ajuan extends BaseController
                 $newPercentage = 40;
                 break;
             case 'Analisa':
-                $newStage = 'Pembuatan';
+                $newStage = 'Pembuatan UI/UX Designer';
+                $newPercentage = 50;
+                break;
+            case 'Pembuatan UI/UX Designer':
+                $newStage = 'Pembuatan Front End';
+                $newPercentage = 60;
+                break;    
+            case 'Pembuatan Front End':
+                $newStage = 'Pembuatan Back End';
+                $newPercentage = 70;
+                break;
+            case 'Pembuatan Back End':
+                $newStage = 'QA Tester';
                 $newPercentage = 80;
                 break;
-            case 'Pembuatan':
-                $newStage = 'Review Implementasi';
-                $newPercentage = 90;
-                break;
-            case 'Review Implementasi':
+            case 'QA Tester':
                 $newStage = 'Done';
                 $newPercentage = 100;
                 break;
@@ -285,10 +295,6 @@ class Ajuan extends BaseController
                 return redirect()->to('/project/data')->with('error', 'Ajuan tidak ditemukan.');
             }
 
-            if (in_groups('admin')) {
-                $data['id_tim'] = $this->request->getPost('id_tim');
-            }
-
             $file = $this->request->getFile('file');
             if ($file && $file->isValid() && !$file->hasMoved()) {
                 $namaFile = $file->getRandomName();
@@ -300,6 +306,10 @@ class Ajuan extends BaseController
             } else {
                 $namaFile = basename($ajuan['file_path']);
             }
+            // if (in_groups('admin')) {
+            //     $data['id_tim'] = $this->request->getPost('id_tim');
+            // }
+
 
             $data = [
                 'id_bagian' => $this->request->getPost('id_bagian'),
@@ -307,6 +317,7 @@ class Ajuan extends BaseController
                 'fungsi' => $this->request->getPost('fungsi'),
                 'nama_aplikasi' => $this->request->getPost('nama_aplikasi'),
                 'deskripsi' => $this->request->getPost('deskripsi'),
+                'id_tim' => $this->request->getPost('id_tim'),
                 'file_path' => 'uploads/pengembangan_apps_files/' . $namaFile,
             ];
 

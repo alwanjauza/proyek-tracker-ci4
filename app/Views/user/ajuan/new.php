@@ -59,13 +59,15 @@
                             </div>
                             <div class="form-group">
                                 <label for="file-upload">File Upload</label>
-                                <input type="file" name="file" id="file-upload" class="file-upload-default">
+                                <input type="file" name="file" id="file-upload" class="file-upload-default" accept="application/pdf">
                                 <div class="input-group col-xs-12">
                                     <input type="text" class="form-control file-upload-info" disabled placeholder="Upload File">
                                     <span class="input-group-append">
                                         <button class="file-upload-browse btn btn-primary" type="button">Browse</button>
                                     </span>
                                 </div>
+                                <small class="form-text text-muted">Only PDF files are allowed, maximum size: 5 MB.</small>
+                                <div id="error-message" style="color: red; margin-top: 5px;"></div>
                             </div>
                             <div class="form-group">
                                 <label for="deskripsi">Deskripsi</label>
@@ -80,4 +82,32 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('file-upload').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const errorMessage = document.getElementById('error-message');
+        errorMessage.textContent = '';
+
+        if (file) {
+            // Check file type
+            if (file.type !== 'application/pdf') {
+                errorMessage.textContent = 'Only PDF files are allowed.';
+                event.target.value = '';
+                return;
+            }
+
+            // Check file size (5 MB = 5 * 1024 * 1024 bytes)
+            if (file.size > 5 * 1024 * 1024) {
+                errorMessage.textContent = 'File size must not exceed 5 MB.';
+                event.target.value = '';
+                return;
+            }
+
+            // Update input placeholder with file name
+            const fileNameInput = document.querySelector('.file-upload-info');
+            fileNameInput.value = file.name;
+        }
+    });
+</script>
 <?= $this->endSection(); ?>

@@ -151,7 +151,7 @@ class PembuatanAplikasi extends BaseController
             'jenis_ajuan' => 'Pembuatan Aplikasi',
             'waktu_kerja' => $this->request->getPost('waktu_kerja'),
             'percentage' => 0,
-            'tahap_saat_ini' => 'pengajuan',
+            'tahap_saat_ini' => 'Pengajuan',
             'status' => 'on_review',
             'fungsi' => $this->request->getPost('fungsi'),
             'file_path' => $filePath,
@@ -201,6 +201,7 @@ class PembuatanAplikasi extends BaseController
             return redirect()->back()->with('message', 'Pengajuan ditolak.');
         }
 
+       
         switch ($ajuan['tahap_saat_ini']) {
             case 'Pengajuan':
                 $newStage = 'Validasi Tim IT';
@@ -215,14 +216,22 @@ class PembuatanAplikasi extends BaseController
                 $newPercentage = 40;
                 break;
             case 'Analisa':
-                $newStage = 'Pembuatan';
+                $newStage = 'Pembuatan UI/UX Designer';
+                $newPercentage = 50;
+                break;
+            case 'Pembuatan UI/UX Designer':
+                $newStage = 'Pembuatan Front End';
+                $newPercentage = 60;
+                break;    
+            case 'Pembuatan Front End':
+                $newStage = 'Pembuatan Back End';
+                $newPercentage = 70;
+                break;
+            case 'Pembuatan Back End':
+                $newStage = 'QA Tester';
                 $newPercentage = 80;
                 break;
-            case 'Pembuatan':
-                $newStage = 'Review Implementasi';
-                $newPercentage = 90;
-                break;
-            case 'Review Implementasi':
+            case 'QA Tester':
                 $newStage = 'Done';
                 $newPercentage = 100;
                 break;
@@ -283,9 +292,9 @@ class PembuatanAplikasi extends BaseController
                 return redirect()->to('/project/list-pembuatan')->with('error', 'Data tidak ditemukan.');
             }
 
-            if (in_groups('admin')) {
-                $data['id_tim'] = $this->request->getPost('id_tim');
-            }
+            // if (in_groups('admin')) {
+            //     $data['id_tim'] = $this->request->getPost('id_tim');
+            // }
 
             $file = $this->request->getFile('file');
             if ($file && $file->isValid() && !$file->hasMoved()) {
@@ -306,6 +315,7 @@ class PembuatanAplikasi extends BaseController
                 'fungsi' => $this->request->getPost('fungsi'),
                 'waktu_kerja' => $this->request->getPost('waktu_kerja'),
                 'deskripsi' => $this->request->getPost('deskripsi'),
+                'id_tim' => $this->request->getPost('id_tim'),
                 'file_path' => 'uploads/pembuatan_app_files/' . $namaFile,
             ];
 

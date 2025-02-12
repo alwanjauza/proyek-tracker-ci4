@@ -17,7 +17,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="<?= base_url(); ?>assets/images/favicon.png" />
+    <link rel="shortcut icon" href="<?= base_url(); ?>assets/images/amikom.png" />
 </head>
 
 <body>

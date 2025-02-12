@@ -25,9 +25,7 @@
                                         <th>Dokumen</th>
                                         <th>Persentase</th>
                                         <th>Status</th>
-                                        <?php if (in_groups('admin') || in_groups('user')) : ?>
-                                            <th>Aksi</th>
-                                        <?php endif; ?>
+                                    
                                     </tr>
                                 </thead>
                                 <tbody>

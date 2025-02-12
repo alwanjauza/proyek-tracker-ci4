@@ -21,7 +21,7 @@
                                 <label for="id_bagian">Bagian</label>
                                 <select class="form-control <?= (session()->getFlashdata('errors')['id_bagian'] ?? '') ? 'is-invalid' : '' ?>" id="id_bagian" name="id_bagian" disabled>
                                     <?php foreach ($bagian as $b) : ?>
-                                        <option value="<?= $b['id_bagian']; ?>" <?= $ajuan['id_bagian'] == $b['id_bagian'] ? 'selected' : ''; ?>><?= $b['nama_bagian']; ?></option>
+                                        <option  style="color: black;" value="<?= $b['id_bagian']; ?>" <?= $ajuan['id_bagian'] == $b['id_bagian'] ? 'selected' : ''; ?>><?= $b['nama_bagian']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <?php if (isset(session()->getFlashdata('errors')['id_bagian'])) : ?>
@@ -35,7 +35,7 @@
                                 <label for="id_jenis_app">Jenis Aplikasi</label>
                                 <select class="form-control <?= (session()->getFlashdata('errors')['id_jenis_app'] ?? '') ? 'is-invalid' : '' ?>" id="id_jenis_app" name="id_jenis_app" disabled>
                                     <?php foreach ($jenisApp as $jenis) : ?>
-                                        <option value="<?= $jenis['id_jenis_app']; ?>" <?= $ajuan['id_jenis_app'] == $jenis['id_jenis_app'] ? 'selected' : ''; ?>><?= $jenis['nama']; ?></option>
+                                        <option style="color: black;" value="<?= $jenis['id_jenis_app']; ?>" <?= $ajuan['id_jenis_app'] == $jenis['id_jenis_app'] ? 'selected' : ''; ?>><?= $jenis['nama']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <?php if (isset(session()->getFlashdata('errors')['id_jenis_app'])) : ?>
@@ -50,20 +50,20 @@
                                 <select class="form-control" id="id_tim" name="id_tim"
                                     <?= ($ajuan['tahap_saat_ini'] != 'validasi_tim_it') ? 'disabled' : ''; ?>>
                                     <?php foreach ($tim as $t) : ?>
-                                        <option value="<?= $t['id_tim']; ?>" <?= $ajuan['id_tim'] == $t['id_tim'] ? 'selected' : ''; ?>><?= $t['nama_tim']; ?></option>
+                                        <option style="color: black;" value="<?= $t['id_tim']; ?>" <?= $ajuan['id_tim'] == $t['id_tim'] ? 'selected' : ''; ?>><?= $t['nama_tim']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="fungsi">Fungsi</label>
-                                <input type="text" class="form-control" id="fungsi" name="fungsi" value="<?= $ajuan['fungsi']; ?>" disabled>
+                                <input style="color: black;" type="text" class="form-control" id="fungsi" name="fungsi" value="<?= $ajuan['fungsi']; ?>" disabled>
                             </div>
 
                             <div class="form-group">
                                 <label for="waktu_kerja">Waktu Pengerjaan (Hari)</label>
                                 <div class="input-group">
-                                    <input type="text" pattern="[0-9]*" inputmode="numeric" name="waktu_kerja" id="waktu_kerja" class="form-control  <?= (session()->getFlashdata('errors')['waktu_kerja'] ?? '') ? 'is-invalid' : '' ?>" placeholder="Waktu Kerja (Dalam Bentuk Hari)" aria-label="Username" disabled aria-describedby="basic-addon1" value="<?= old('fungsi', $ajuan['waktu_kerja']); ?>">
+                                    <input style="color: black;" type="text" pattern="[0-9]*" inputmode="numeric" name="waktu_kerja" id="waktu_kerja" class="form-control  <?= (session()->getFlashdata('errors')['waktu_kerja'] ?? '') ? 'is-invalid' : '' ?>" placeholder="Waktu Kerja (Dalam Bentuk Hari)" aria-label="Username" disabled aria-describedby="basic-addon1" value="<?= old('fungsi', $ajuan['waktu_kerja']); ?>">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Hari</span>
                                     </div>
@@ -77,7 +77,7 @@
 
                             <div class="form-group">
                                 <label for="deskripsi">Deskripsi</label>
-                                <textarea class="form-control" id="deskripsi" name="deskripsi" rows="4" disabled><?= $ajuan['deskripsi']; ?></textarea>
+                                <textarea style="color: black;" class="form-control" id="deskripsi" name="deskripsi" rows="4" disabled><?= $ajuan['deskripsi']; ?></textarea>
                             </div>
 
                             <?php if ($ajuan['status'] !== 'Done') : ?>
